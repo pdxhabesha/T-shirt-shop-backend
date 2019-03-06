@@ -10,6 +10,7 @@ django-heroku = "*"
 djangorestframework = "*"
 python-decouple = "*"
 "psycopg2-binary" = "*"
+pymysql = "*"
 
 [dev-packages]
 pylint = "*"
