@@ -8,6 +8,7 @@ django = "*"
 gunicorn = "*"
 django-heroku = "*"
 djangorestframework = "*"
+python-decouple = "*"
 
 [dev-packages]
 pylint = "*"
