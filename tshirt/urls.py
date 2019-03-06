@@ -19,6 +19,7 @@ from rest_framework import routers
 from tshirtapp import views
 
 router = routers.DefaultRouter()
+router.register(r'products', views.ProductViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 
