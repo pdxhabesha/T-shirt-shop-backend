@@ -1,1 +1,1 @@
-web: gunicorn tshirt.wsgi
+web: gunicorn tshirt.tshirt.wsgi
