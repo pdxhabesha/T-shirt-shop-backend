@@ -82,7 +82,6 @@ WSGI_APPLICATION = 'tshirt.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-#TODO change db to MYSQL
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
