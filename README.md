@@ -34,6 +34,7 @@ Quick start options is available:
 - Install Python Virtual Enviroment [pipenv](https://pipenv.readthedocs.io/en/latest/install/): `pip install --user pipenv`
 - Create Virtual Enviroment: `pipenv --three`
 - Clone the repo: `https://github.com/pdxhabesha/T-shirt-shop-backend.git`
+- Create .env and include all nessesary enviroment variables for this project: `touch .env`
 - Install dependency: `pipenv install`
 - Migrate database with django command: `./manage.py migrate`
 - Start Django server: `./manage.py runserver`
