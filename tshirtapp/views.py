@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from tshirtapp.serializers import UserSerializer, GroupSerializer, ProductSerializer
-from tshirtapp.models import Product
+from tshirtapp.xmodels import Product
 
 
 class UserViewSet(viewsets.ModelViewSet):

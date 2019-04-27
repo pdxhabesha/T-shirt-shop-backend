@@ -83,14 +83,12 @@ WSGI_APPLICATION = 'tshirt.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'clothing',
         'USER': 'root',
         'PASSWORD': 'Godislove',
-        'HOST': '34.222.123.230',
+        'HOST': 'ec2-34-222-123-230.us-west-2.compute.amazonaws.com',
         'PORT': '3306',
-        'OPTIONS': {
-            'autocommit': True,
-        },
     }
 }
 
