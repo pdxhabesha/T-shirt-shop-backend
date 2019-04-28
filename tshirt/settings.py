@@ -77,6 +77,8 @@ WSGI_APPLICATION = 'tshirt.wsgi.application'
 #     'default': dj_database_url.config(default=config("DATABASE_URL"))
 # }
 
+django_heroku.settings(locals())
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -127,7 +129,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-django_heroku.settings(locals())
 
 # del DATABASES['default']['OPTIONS']['sslmode']
 
