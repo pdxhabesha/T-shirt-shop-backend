@@ -77,7 +77,7 @@ DATABASES = {
     'default': dj_database_url.config(default=config("DATABASE_URL"))
 }
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
 
 # DATABASES = {
 #     'default': {
@@ -133,7 +133,7 @@ print("database: ", DATABASES)
 print("Debug: ", DEBUG)
 print("Allowed: ", ALLOWED_HOSTS)
 
-# del DATABASES['default']['OPTIONS']['sslmode']
+del DATABASES['default']['OPTIONS']['sslmode']
 
 
 
