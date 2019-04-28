@@ -27,11 +27,6 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
 
-print("Config ALLOWED_HOSTS ", config('ALLOWED_HOSTS'))
-print("ALLOWED_HOSTS ", ALLOWED_HOSTS)
-print("SECRET_KEY ", SECRET_KEY)
-print("DEBUG ", DEBUG)
-# Application definition
 
 INSTALLED_APPS = [
     'tshirtapp',
