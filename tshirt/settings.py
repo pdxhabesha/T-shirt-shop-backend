@@ -129,6 +129,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+print("database: ", DATABASES)
+print("Debug: ", DEBUG)
+print("Allowed: ", ALLOWED_HOSTS)
 
 # del DATABASES['default']['OPTIONS']['sslmode']
 
