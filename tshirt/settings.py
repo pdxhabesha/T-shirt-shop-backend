@@ -92,6 +92,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
+AUTH_USER_MODEL = "tshirtapp.User"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -130,7 +131,7 @@ STATIC_URL = '/static/'
 
 django_heroku.settings(locals())
 
-del DATABASES['default']['OPTIONS']['sslmode']
+# del DATABASES['default']['OPTIONS']['sslmode']
 
 
 
