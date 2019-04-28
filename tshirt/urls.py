@@ -20,14 +20,18 @@ from tshirtapp import views
 
 router = routers.DefaultRouter()
 router.register(r'products', views.ProductViewSet)
-router.register(r'users', views.UserViewSet)
+router.register(r'shipping', views.ShippingViewSet)
+router.register(r'tax', views.TexViewSet)
+router.register(r'department', views.DepartmentViewSet)
 router.register(r'groups', views.GroupViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('signup/customer/', views.signup_customer, name='signup_seeker'),
+    path('signup/admin/', views.signup_admin, name='signup_admin'),
 ]
 
 
