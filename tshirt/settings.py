@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'clothing',
         'USER': config('USER'),
         'PASSWORD': config('PASSWORD'),
-        'HOST': config('HOST'),
+        'HOST': '34.222.123.230',
         'PORT': config('PORT'),
     }
 }
