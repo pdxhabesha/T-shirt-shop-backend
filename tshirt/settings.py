@@ -73,22 +73,22 @@ REST_FRAMEWORK = {
 
 WSGI_APPLICATION = 'tshirt.wsgi.application'
 
-# DATABASES = {
-#     'default': dj_database_url.config(default=config("DATABASE_URL"))
-# }
+DATABASES = {
+    'default': dj_database_url.config(default=config("DATABASE_URL"))
+}
 
 # django_heroku.settings(locals())
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'clothing',
-        'USER': 'root',
-        'PASSWORD': 'Godislove',
-        'HOST': '34.222.123.230',
-        'PORT': config('PORT'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'clothing',
+#         'USER': 'root',
+#         'PASSWORD': 'Godislove',
+#         'HOST': '34.222.123.230',
+#         'PORT': config('PORT'),
+#     }
+# }
 
 
 # Password validation
