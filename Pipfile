@@ -6,11 +6,12 @@ name = "pypi"
 [packages]
 django = "*"
 gunicorn = "*"
-django-heroku = "*"
 djangorestframework = "*"
 python-decouple = "*"
 "psycopg2-binary" = "*"
-pymysql = "*"
+mysql-connector-python = "*"
+mysqlclient = "*"
+django-heroku = "*"
 
 [dev-packages]
 pylint = "*"

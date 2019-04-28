@@ -15,7 +15,9 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'name')
 
 
-class ProductSerializer(serializers.HyperlinkedModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Product
-        fields = ("__all__")
+        # fields = ("name", "description", "image", "thumbnail", "display")
+        fields = "__all__"
