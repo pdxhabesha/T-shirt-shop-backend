@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import dj_database_url
 from decouple import config
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,15 +22,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '-tymwqg%n88qyf$_(+82(y4#xiwl3js#(x720rn$s=fi9(mxg*'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', cast=bool)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
 
-ALLOWED_HOSTS = []
-
-
+print("Config ALLOWED_HOSTS ", config('ALLOWED_HOSTS'))
+print("ALLOWED_HOSTS ", ALLOWED_HOSTS)
+print("SECRET_KEY ", SECRET_KEY)
+print("DEBUG ", DEBUG)
 # Application definition
 
 INSTALLED_APPS = [
@@ -77,19 +78,18 @@ REST_FRAMEWORK = {
 
 WSGI_APPLICATION = 'tshirt.wsgi.application'
 
+# DATABASES = {
+#     'default': dj_database_url.config(default=config("DATABASE_URL"))
+# }
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',
-        # 'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'clothing',
-        'USER': 'root',
-        'PASSWORD': 'Godislove',
-        'HOST': 'ec2-34-222-123-230.us-west-2.compute.amazonaws.com',
-        'PORT': '3306',
-        "OPTIONS": {
-            "use_pure":True
-        }
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
+        'HOST': config('HOST'),
+        'PORT': config('PORT'),
     }
 }
 
@@ -131,6 +131,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-import django_heroku
+
 # django_heroku.settings(locals())
+
+# del DATABASES['default']['OPTIONS']['sslmode']
+
+
 
