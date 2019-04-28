@@ -77,15 +77,14 @@ DATABASES = {
     'default': dj_database_url.config(default=config("DATABASE_URL"))
 }
 
-django_heroku.settings(locals())
 
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'clothing',
-#         'USER': 'root',
-#         'PASSWORD': 'Godislove',
-#         'HOST': '34.222.123.230',
+#         'NAME': config('NAME'),
+#         'USER': config('USER'),
+#         'PASSWORD': config('PASSWORD'),
+#         'HOST': config('HOST'),
 #         'PORT': config('PORT'),
 #     }
 # }
@@ -129,9 +128,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-print("database: ", DATABASES)
-print("Debug: ", DEBUG)
-print("Allowed: ", ALLOWED_HOSTS)
+django_heroku.settings(locals())
 
 del DATABASES['default']['OPTIONS']['sslmode']
 
