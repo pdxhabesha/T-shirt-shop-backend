@@ -10,8 +10,8 @@ django-heroku = "*"
 djangorestframework = "*"
 python-decouple = "*"
 "psycopg2-binary" = "*"
-pymysql = "*"
 mysql-connector-python = "*"
+mysqlclient = "*"
 
 [dev-packages]
 pylint = "*"
