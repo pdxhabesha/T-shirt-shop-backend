@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'tshirt.wsgi.application'
 #     'default': dj_database_url.config(default=config("DATABASE_URL"))
 # }
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 DATABASES = {
     'default': {
