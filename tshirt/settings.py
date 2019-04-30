@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-# import dj_database_url
+import dj_database_url
 from decouple import config
 import django_heroku
 
@@ -78,26 +78,26 @@ REST_FRAMEWORK = {
 
 WSGI_APPLICATION = 'tshirt.wsgi.application'
 
-# DATABASES = {
-#     'default': dj_database_url.config(default=config("DATABASE_URL")),
-# }
-
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'mysql.connector.django',
-        # 'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('NAME'),
-        'USER': config('USER'),
-        'PASSWORD': config('PASSWORD'),
-        'HOST': config('HOST'),
-        'PORT': config('PORT'),
-    },
-    "option": {
-        "use_pure": True,
-        'autocommit': True,
-    }
+    'default': dj_database_url.config(default=config("DATABASE_URL")),
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'mysql.connector.django',
+#         # 'ENGINE': 'django.db.backends.mysql',
+#         'NAME': config('NAME'),
+#         'USER': config('USER'),
+#         'PASSWORD': config('PASSWORD'),
+#         'HOST': config('HOST'),
+#         'PORT': config('PORT'),
+#     },
+#     "option": {
+#         "use_pure": True,
+#         'autocommit': True,
+#     }
+# }
 
 
 # Password validation
@@ -140,9 +140,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
 
-# del DATABASES['default']['OPTIONS']['sslmode']
+del DATABASES['default']['OPTIONS']['sslmode']
 
 if config('DEBUG', cast=bool):
     print(DATABASES)
