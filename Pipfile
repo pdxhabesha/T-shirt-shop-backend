@@ -12,6 +12,7 @@ python-decouple = "*"
 mysql-connector-python = "*"
 mysqlclient = "*"
 django-heroku = "*"
+django-oauth-toolkit = "*"
 
 [dev-packages]
 pylint = "*"
