@@ -3,10 +3,10 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 
-# from tshirtapp.serializers import ProductSerializer, \
-#     ShippingSerializer, TaxSerializer, DepartmentSerializer, SignupCustomerSerializer, SignupAdminSerializer
-# from tshirtapp.models import Product, Shipping, Tax, Department
-from tshirtapp.serializers import SignupAdminSerializer, SignupCustomerSerializer
+from tshirtapp.serializers import ProductSerializer, \
+    ShippingSerializer, TaxSerializer, DepartmentSerializer, SignupCustomerSerializer, SignupAdminSerializer
+from tshirtapp.models import Product, Shipping, Tax, Department
+# from tshirtapp.serializers import SignupAdminSerializer, SignupCustomerSerializer
 
 
 @api_view(http_method_names=['POST'])
@@ -36,23 +36,23 @@ def signup_admin(request):
     serializer.save()
     return Response(data=serializer.data)
 
-#
-# class ProductViewSet(viewsets.ModelViewSet):
-#     queryset = Product.objects.all()
-#     serializer_class = ProductSerializer
-#
-#
-# class ShippingViewSet(viewsets.ModelViewSet):
-#     queryset = Shipping.objects.all()
-#     serializer_class = ShippingSerializer
-#
-#
-# class TexViewSet(viewsets.ModelViewSet):
-#     queryset = Tax.objects.all()
-#     serializer_class = TaxSerializer
-#
-#
-# class DepartmentViewSet(viewsets.ModelViewSet):
-#     queryset = Department.objects.all()
-#     serializer_class = DepartmentSerializer
-#
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ShippingViewSet(viewsets.ModelViewSet):
+    queryset = Shipping.objects.all()
+    serializer_class = ShippingSerializer
+
+
+class TexViewSet(viewsets.ModelViewSet):
+    queryset = Tax.objects.all()
+    serializer_class = TaxSerializer
+
+
+class DepartmentViewSet(viewsets.ModelViewSet):
+    queryset = Department.objects.all()
+    serializer_class = DepartmentSerializer
+
