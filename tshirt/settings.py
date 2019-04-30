@@ -139,5 +139,6 @@ django_heroku.settings(locals())
 
 del DATABASES['default']['OPTIONS']['sslmode']
 
-print(DATABASES)
+if config('DEBUG', cast=bool):
+    print(DATABASES)
 
