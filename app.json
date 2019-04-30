@@ -8,6 +8,15 @@
     "ALLOWED_HOSTS": {
       "required": true
     },
+     "HOST": {
+      "required": true
+    },
+    "PORT": {
+      "required": true
+    },
+    "NAME": {
+      "required": true
+    },
     "DEBUG": {
       "required": true
     },
