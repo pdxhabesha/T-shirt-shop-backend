@@ -17,6 +17,12 @@
     "NAME": {
       "required": true
     },
+     "USER": {
+      "required": true
+    },
+     "PASSWORD": {
+      "required": true
+    },
     "DEBUG": {
       "required": true
     },
