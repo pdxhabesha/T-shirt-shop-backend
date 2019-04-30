@@ -82,22 +82,6 @@ DATABASES = {
     'default': dj_database_url.config(default=config("DATABASE_URL")),
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'mysql.connector.django',
-#         # 'ENGINE': 'django.db.backends.mysql',
-#         'NAME': config('NAME'),
-#         'USER': config('USER'),
-#         'PASSWORD': config('PASSWORD'),
-#         'HOST': config('HOST'),
-#         'PORT': config('PORT'),
-#     },
-#     "option": {
-#         "use_pure": True,
-#         'autocommit': True,
-#     }
-# }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -142,7 +126,6 @@ STATIC_URL = '/static/'
 django_heroku.settings(locals())
 
 del DATABASES['default']['OPTIONS']['sslmode']
-DATABASES['default']["ENGINE"] = 'mysql.connector.django'
 
 if config('DEBUG', cast=bool):
     print(DATABASES)
