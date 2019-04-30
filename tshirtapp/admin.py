@@ -1,5 +1,5 @@
 from django.contrib import admin
-from tshirtapp.models import User, Customer
+from tshirtapp.models import User, Customer, Admin, Product
 
 
 # Register your models here.
@@ -12,5 +12,25 @@ class UserAdmin(admin.ModelAdmin):
 
 
 @admin.register(Customer)
-class UserAdmin(admin.ModelAdmin):
-    list_display = ["credit_card","address_1", "city", "region", "postal_code", "country", "shipping_region_id", "day_phone"]
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ["user", "credit_card", "address_1", "city", "region", "postal_code", "country",
+                    "shipping_region_id", "day_phone"]
+
+    def __str__(self):
+        return f'Customer {self.user.first_name}:'
+
+
+@admin.register(Admin)
+class AdminAdmin(admin.ModelAdmin):
+    list_display = ['user', "credit_card"]
+
+    def __str__(self):
+        return f'Admin {self.user.first_name}:'
+
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['name', "description", 'price']
+
+    def __str__(self):
+        return f'Admin {self.user.first_name}:'
