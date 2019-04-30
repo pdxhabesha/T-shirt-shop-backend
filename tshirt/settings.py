@@ -74,18 +74,23 @@ REST_FRAMEWORK = {
 WSGI_APPLICATION = 'tshirt.wsgi.application'
 
 # DATABASES = {
-#     'default': dj_database_url.config(default=config("DATABASE_URL"))
+#     'default': dj_database_url.config(default=config("DATABASE_URL")),
 # }
 
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        # 'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': config('NAME'),
         'USER': config('USER'),
         'PASSWORD': config('PASSWORD'),
         'HOST': config('HOST'),
         'PORT': config('PORT'),
+    },
+    "option": {
+        "use_pure": True,
+        'autocommit': True,
     }
 }
 
@@ -130,9 +135,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
 
-# del DATABASES['default']['OPTIONS']['sslmode']
+del DATABASES['default']['OPTIONS']['sslmode']
 
-
+print(DATABASES)
 
