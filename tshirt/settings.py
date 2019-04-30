@@ -82,7 +82,6 @@ DATABASES = {
     'default': dj_database_url.config(default=config("DATABASE_URL")),
 }
 
-DATABASES['default']["ENGINE"] = 'mysql.connector.django'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'mysql.connector.django',
@@ -143,6 +142,7 @@ STATIC_URL = '/static/'
 django_heroku.settings(locals())
 
 del DATABASES['default']['OPTIONS']['sslmode']
+DATABASES['default']["ENGINE"] = 'mysql.connector.django'
 
 if config('DEBUG', cast=bool):
     print(DATABASES)
