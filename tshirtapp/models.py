@@ -37,6 +37,7 @@ class Admin(BaseModel):
 
 
 class Customer(BaseModel):
+    customer_id=models.AutoField(primary_key=True, serialize=False,)
     user = models.OneToOneField(verbose_name=_('user'), to='User', related_name='%(class)s', on_delete=models.CASCADE)
     credit_card = models.TextField(blank=True, null=True)
     address_1 = models.CharField(max_length=100, blank=True, null=True)
@@ -51,7 +52,7 @@ class Customer(BaseModel):
     mob_phone = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'customer'
 
     def __str__(self):
