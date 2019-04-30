@@ -13,6 +13,8 @@ mysql-connector-python = "*"
 mysqlclient = "*"
 django-heroku = "*"
 django-oauth-toolkit = "*"
+django-cors-headers = "*"
+django-cors-middleware = "*"
 
 [dev-packages]
 pylint = "*"
