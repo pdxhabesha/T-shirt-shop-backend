@@ -5,6 +5,18 @@
     }
   ],
   "env": {
+    "ALLOWED_HOSTS": {
+      "required": true
+    },
+    "DEBUG": {
+      "required": true
+    },
+    "SECRET_KEY": {
+      "required": true
+    },
+    "DATABASE_URL": {
+      "required": true
+    }
   },
   "formation": {
     "web": {
