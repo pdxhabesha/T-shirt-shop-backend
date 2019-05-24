@@ -3,9 +3,9 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 
-from tshirtapp.serializers import ProductSerializer, \
-    ShippingSerializer, TaxSerializer, DepartmentSerializer, SignupCustomerSerializer, SignupAdminSerializer
-from tshirtapp.models import Product, Shipping, Tax, Department
+from tshirtapp.serializers import ProductSerializer, ShippingSerializer, TaxSerializer, DepartmentSerializer, \
+    SignupCustomerSerializer, SignupAdminSerializer, ProductAttributeSerializer
+from tshirtapp.models import Product, Shipping, Tax, Department, ProductAttribute
 # from tshirtapp.serializers import SignupAdminSerializer, SignupCustomerSerializer
 
 
@@ -37,9 +37,28 @@ def signup_admin(request):
     return Response(data=serializer.data)
 
 
-class ProductViewSet(viewsets.ModelViewSet):
+class ProductViewSet(viewsets.ViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+    def list(self, request, *args, **kwargs):
+        products = Product.objects.all()
+        # for product in products:
+        #     # product['attributes'] = ProductAttribute.objects.filter(product_id=product.product_id)
+        #     print(product)
+
+        # atrribute = ProductAttribute.objects.all()
+
+        # print("products", products, atrribute)
+        serializer = ProductSerializer(products, many=True)
+        # print(serializer)
+        # for product in serializer.data:
+        #     # print(product)
+        #     product_attribute = ProductAttribute.objects.filter(product_id=product["product_id"])
+        #     product_serializer = ProductAttributeSerializer(instance=product_attribute, many=True)
+        #     product['attributes'] = product_serializer.data
+
+        return Response(data=serializer.data)
 
 
 class ShippingViewSet(viewsets.ModelViewSet):
@@ -56,3 +75,7 @@ class DepartmentViewSet(viewsets.ModelViewSet):
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
 
+
+class ProductAttributeViewSet(viewsets.ModelViewSet):
+    queryset = ProductAttribute.objects.all()
+    serializer_class = ProductAttributeSerializer
