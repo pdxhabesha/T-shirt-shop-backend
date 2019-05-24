@@ -1,6 +1,6 @@
 from django.db import transaction
 from rest_framework import serializers
-from .models import Product, Shipping, Tax, Department, Customer, User, Admin
+from .models import Product, Shipping, Tax, Department, Customer, User, Admin, ProductAttribute
 
 
 class SignupCustomerSerializer(serializers.ModelSerializer):
@@ -43,16 +43,25 @@ class SignupAdminSerializer(serializers.ModelSerializer):
         # Create auth user model first
         validated_user_data = validated_data.pop('user', {})
         user = User.objects.create_user(is_customer=True, **validated_user_data)
-        # Create Seeker profile
+        # Create Admin profile
         return Admin.objects.create(user=user, **validated_data)
 
 
+class ProductAttributeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductAttribute
+        fields = "__all__"
+
+
 class ProductSerializer(serializers.ModelSerializer):
+    attribute = ProductAttributeSerializer(many=True, read_only=True)
+    # product_id = serializers.ReadOnlyField(source='attribute.product_id')
+    # attribute_value_id = serializers.ReadOnlyField(source='attribute.attribute_value_id')
 
     class Meta:
         model = Product
-        # fields = ("name", "description", "image", "thumbnail", "display")
         fields = "__all__"
+        depth = 3
 
 
 class ShippingSerializer(serializers.ModelSerializer):
