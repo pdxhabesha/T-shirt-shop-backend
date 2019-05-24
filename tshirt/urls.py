@@ -23,6 +23,7 @@ router.register(r'products', views.ProductViewSet)
 router.register(r'shipping', views.ShippingViewSet)
 router.register(r'tax', views.TexViewSet)
 router.register(r'department', views.DepartmentViewSet)
+router.register(r'attribute', views.ProductAttributeViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
