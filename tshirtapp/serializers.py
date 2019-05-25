@@ -48,9 +48,6 @@ class SignupAdminSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    # attribute = ProductAttributeSerializer(many=True, read_only=True)
-    # product_id = serializers.ReadOnlyField(source='attribute.product_id')
-    # attribute_value_id = serializers.ReadOnlyField(source='attribute.attribute_value_id')
 
     class Meta:
         model = Product
