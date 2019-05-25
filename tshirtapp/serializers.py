@@ -1,6 +1,6 @@
 from django.db import transaction
 from rest_framework import serializers
-from .models import Product, Shipping, Tax, Department, Customer, User, Admin, ProductAttribute
+from .models import Product, Shipping, Tax, Department, Customer, User, Admin
 
 
 class SignupCustomerSerializer(serializers.ModelSerializer):
@@ -47,21 +47,15 @@ class SignupAdminSerializer(serializers.ModelSerializer):
         return Admin.objects.create(user=user, **validated_data)
 
 
-class ProductAttributeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProductAttribute
-        fields = "__all__"
-
-
 class ProductSerializer(serializers.ModelSerializer):
-    attribute = ProductAttributeSerializer(many=True, read_only=True)
+    # attribute = ProductAttributeSerializer(many=True, read_only=True)
     # product_id = serializers.ReadOnlyField(source='attribute.product_id')
     # attribute_value_id = serializers.ReadOnlyField(source='attribute.attribute_value_id')
 
     class Meta:
         model = Product
         fields = "__all__"
-        depth = 3
+        depth = 2
 
 
 class ShippingSerializer(serializers.ModelSerializer):
@@ -83,3 +77,4 @@ class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
         fields = "__all__"
+
