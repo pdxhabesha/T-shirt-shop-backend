@@ -34,3 +34,5 @@ class ProductAdmin(admin.ModelAdmin):
 
     def __str__(self):
         return f'Admin {self.user.first_name}:'
+
+
