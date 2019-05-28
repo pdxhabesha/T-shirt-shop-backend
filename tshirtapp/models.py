@@ -123,25 +123,6 @@ class Product(models.Model):
         db_table = "product"
 
 
-# class ProductAttribute(models.Model):
-#     product_id = models.ForeignKey(Product, on_delete="CASCADE")
-#     attribute_value = models.ForeignKey(verbose_name="attribute_value_id", to='AttributeValue', on_delete="CASCADE")
-#
-#     class Meta:
-#         db_table = "product_attribute"
-#         # unique_together = (('product_id', 'attribute_value'),)
-#
-#
-# class ProductCategory(models.Model):
-#     product = models.OneToOneField(verbose_name="product_id", to="Product", on_delete="CASCADE")
-#     category = models.ForeignKey(verbose_name="category_id", to='AttributeValue', on_delete="CASCADE")
-#     name = models.CharField(max_length=100, null=True, blank=True, default="name")
-#
-#     class Meta:
-#         db_table = "product_category"
-#         # unique_together = (('product', 'category'),)
-#
-
 class OrderDetail(models.Model):
     item_id = models.AutoField(primary_key=True)
     order = models.ForeignKey(to="Orders", verbose_name="order_id", on_delete=models.CASCADE,
@@ -218,17 +199,16 @@ class Tax(models.Model):
 class Orders(models.Model):
     order_id = models.AutoField(primary_key=True)
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    created_on = models.DateTimeField()
+    created_on = models.DateTimeField(verbose_name=_('created on'), auto_now_add=True, db_index=True)
     shipped_on = models.DateTimeField(blank=True, null=True)
-    status = models.IntegerField()
+    status = models.IntegerField(blank=True, null=True)
     comments = models.CharField(max_length=255, blank=True, null=True)
     auth_code = models.CharField(max_length=50, blank=True, null=True)
     reference = models.CharField(max_length=50, blank=True, null=True)
-    customer = models.ForeignKey(Customer, verbose_name="customer_id", on_delete=models.CASCADE,
-                                 default=1, null=False)
-    tax = models.ForeignKey(Tax, verbose_name="tax_id", on_delete=models.CASCADE, null=True)
+    customer = models.ForeignKey(Customer, verbose_name="customer_id", on_delete=models.CASCADE, null=True, blank=True)
+    tax = models.ForeignKey(Tax, verbose_name="tax_id", on_delete=models.CASCADE, null=False, blank=False, default=1)
     shipping = models.ForeignKey(Shipping, verbose_name="shipping_id", on_delete=models.CASCADE,
-                                 default=1, null=False)
+                                 default=3, null=False)
 
     class Meta:
         db_table = 'orders'
@@ -243,3 +223,11 @@ class Audit(models.Model):
 
     class Meta:
         db_table = 'audit'
+
+
+# class Transaction(models.Model):
+#     description = models.CharField(max_length=500, blank=False, null=False)
+#     user = models.ForeignKey(to="User", related_name='transaction', on_delete=models.PROTECT, blank=True, null=True)
+#     item = models.ForeignKey(to="Product", on_delete=models.PROTECT)
+#     amount = models.IntegerField()
+#     currency = models.CharField(max_length=3, default='usd')
