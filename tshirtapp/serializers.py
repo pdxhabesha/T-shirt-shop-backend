@@ -1,6 +1,6 @@
 from django.db import transaction
 from rest_framework import serializers
-from .models import Product, Shipping, Tax, Department, Customer, User, Admin
+from .models import Product, Shipping, Tax, Department, Customer, User, Admin, Orders, Customer
 
 
 class SignupCustomerSerializer(serializers.ModelSerializer):
@@ -75,3 +75,26 @@ class DepartmentSerializer(serializers.ModelSerializer):
         model = Department
         fields = "__all__"
 
+
+class OrderSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Orders
+        fields = "__all__"
+
+    @transaction.atomic  # Ensure creation of both models is done in a single transaction not to create inconsistencies
+    def create(self, validated_data):
+        """
+        Creates new User and Seeker profile.
+        """
+        # Create Orders model with customer
+        validated_user_data = validated_data.pop('user', {})
+        # Create Orders profile
+        return Orders.objects.create(**validated_data)
+
+
+class CustomerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Customer
+        fields = "__all__"
