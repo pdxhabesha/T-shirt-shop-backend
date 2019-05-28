@@ -43,7 +43,7 @@ class SignupAdminSerializer(serializers.ModelSerializer):
         # Create auth user model first
         validated_user_data = validated_data.pop('user', {})
         user = User.objects.create_user(is_customer=True, **validated_user_data)
-        # Create Seeker profile
+        # Create Admin profile
         return Admin.objects.create(user=user, **validated_data)
 
 
@@ -51,8 +51,8 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        # fields = ("name", "description", "image", "thumbnail", "display")
         fields = "__all__"
+        depth = 2
 
 
 class ShippingSerializer(serializers.ModelSerializer):
@@ -74,3 +74,4 @@ class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
         fields = "__all__"
+

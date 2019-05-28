@@ -33,6 +33,8 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('signup/customer/', views.signup_customer, name='signup_seeker'),
     path('signup/admin/', views.signup_admin, name='signup_admin'),
+    path('api/upload', views.upload, name="uplaod"),
+
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
 
