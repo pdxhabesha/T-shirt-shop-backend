@@ -15,6 +15,8 @@ django-heroku = "*"
 django-oauth-toolkit = "*"
 django-cors-headers = "*"
 django-cors-middleware = "*"
+stripe = "*"
+drf-yasg = "*"
 
 [dev-packages]
 pylint = "*"
