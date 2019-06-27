@@ -17,12 +17,17 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 from tshirtapp import views
+from django.conf import settings
+from django.conf.urls.static import static
+from .docs import schema_view
 
 router = routers.DefaultRouter()
 router.register(r'products', views.ProductViewSet)
 router.register(r'shipping', views.ShippingViewSet)
 router.register(r'tax', views.TexViewSet)
 router.register(r'department', views.DepartmentViewSet)
+router.register(r'customer', views.CustomerViewSet)
+router.register(r'shipping-region', views.ShippingRegionViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -34,8 +39,10 @@ urlpatterns = [
     path('signup/customer/', views.signup_customer, name='signup_seeker'),
     path('signup/admin/', views.signup_admin, name='signup_admin'),
     path('api/upload', views.upload, name="uplaod"),
-
+    path('api/charge', views.charge, name="charge"),
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-]
+    path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

@@ -1,26 +1,26 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 
+from tshirt import settings
 from tshirtapp.serializers import ProductSerializer, ShippingSerializer, TaxSerializer, DepartmentSerializer, \
-    SignupCustomerSerializer, SignupAdminSerializer
-from tshirtapp.models import Product, Shipping, Tax, Department, Category
-# from tshirtapp.models import Product, Shipping, Tax, Department
+    SignupCustomerSerializer, SignupAdminSerializer, OrderSerializer, CustomerSerializer, ShippingRegionSerializer
+from tshirtapp.models import Product, Shipping, Tax, Department, Category, Customer, ShippingRegion
+
+import stripe
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 @api_view(http_method_names=['POST'])
 @permission_classes([])
 def signup_customer(request):
-    """Signs up a Seeker and returns an access and refresh JSON web token pair"""
+    """Signs up a Customer and returns an access and refresh JSON web token pair"""
 
     serializer = SignupCustomerSerializer(data=request.data, context={'request': request})
-    print("before is_valid")
     serializer.is_valid(raise_exception=True)
-    # print("serializer error: ", serializer.errors)
-    print("after is_valid, before save")
-
     serializer.save()
-    print("after save")
 
     return Response(data=serializer.data)
 
@@ -28,7 +28,7 @@ def signup_customer(request):
 @api_view(http_method_names=['POST'])
 @permission_classes([])
 def signup_admin(request):
-    """Signs up a Seeker and returns an access and refresh JSON web token pair"""
+    """Signs up a Admin and returns an access and refresh JSON web token pair"""
 
     serializer = SignupAdminSerializer(data=request.data, context={'request': request})
     serializer.is_valid(raise_exception=True)
@@ -36,14 +36,9 @@ def signup_admin(request):
     return Response(data=serializer.data)
 
 
-class ProductViewSet(viewsets.ViewSet):
+class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-
-    def list(self, request, *args, **kwargs):
-        products = Product.objects.all()
-        serializer = ProductSerializer(products, many=True)
-        return Response(data=serializer.data)
 
 
 class ShippingViewSet(viewsets.ModelViewSet):
@@ -59,6 +54,16 @@ class TexViewSet(viewsets.ModelViewSet):
 class DepartmentViewSet(viewsets.ModelViewSet):
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
+
+
+class ShippingRegionViewSet(viewsets.ModelViewSet):
+    queryset = ShippingRegion.objects.all()
+    serializer_class = ShippingRegionSerializer
+
+
+class CustomerViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
 
 
 @api_view(http_method_names=['GET'])
@@ -102,3 +107,28 @@ def upload(request):
     serializer = ProductSerializer(instance=products, context={'request': request})
 
     return Response(data=serializer.data)
+
+
+@swagger_auto_schema(methods=['post'], request_body=OrderSerializer)
+@api_view(http_method_names=['POST'])
+@permission_classes([])
+def charge(request):
+    amount = request.data['total_amount'] or 250
+    currency = 'usd'
+    comments = 'Test Description'
+
+    status = stripe.Charge.create(
+        amount=amount,
+        currency=currency,
+        description=comments,
+        source=request.data['token']
+    )
+    serializer = OrderSerializer(data=request.data, context={'request': request})
+
+    serializer.is_valid()
+    if serializer.errors:
+        return Response(data=serializer.errors, status=404)
+
+    else:
+        serializer.save()
+        return Response(data=status)
