@@ -1,6 +1,6 @@
 from django.db import transaction
 from rest_framework import serializers
-from .models import Product, Shipping, Tax, Department, Customer, User, Admin, Orders, Customer
+from .models import Product, Shipping, Tax, Department, User, Admin, Orders, Customer, ShippingRegion
 
 
 class SignupCustomerSerializer(serializers.ModelSerializer):
@@ -59,6 +59,13 @@ class ShippingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Shipping
+        fields = "__all__"
+
+
+class ShippingRegionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ShippingRegion
         fields = "__all__"
 
 
