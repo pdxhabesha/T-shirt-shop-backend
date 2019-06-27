@@ -5,8 +5,8 @@ from rest_framework.decorators import api_view, permission_classes
 
 from tshirt import settings
 from tshirtapp.serializers import ProductSerializer, ShippingSerializer, TaxSerializer, DepartmentSerializer, \
-    SignupCustomerSerializer, SignupAdminSerializer, OrderSerializer, CustomerSerializer
-from tshirtapp.models import Product, Shipping, Tax, Department, Category, Customer
+    SignupCustomerSerializer, SignupAdminSerializer, OrderSerializer, CustomerSerializer, ShippingRegionSerializer
+from tshirtapp.models import Product, Shipping, Tax, Department, Category, Customer, ShippingRegion
 
 import stripe
 
@@ -54,6 +54,11 @@ class TexViewSet(viewsets.ModelViewSet):
 class DepartmentViewSet(viewsets.ModelViewSet):
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
+
+
+class ShippingRegionViewSet(viewsets.ModelViewSet):
+    queryset = ShippingRegion.objects.all()
+    serializer_class = ShippingRegionSerializer
 
 
 class CustomerViewSet(viewsets.ReadOnlyModelViewSet):
