@@ -27,6 +27,7 @@ router.register(r'shipping', views.ShippingViewSet)
 router.register(r'tax', views.TexViewSet)
 router.register(r'department', views.DepartmentViewSet)
 router.register(r'customer', views.CustomerViewSet)
+router.register(r'shipping-region', views.ShippingRegionViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
